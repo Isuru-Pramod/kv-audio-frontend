@@ -6,7 +6,8 @@ export default function Header(){
 
             <img src="/images-removebg-preview.png" alt="logo" className="w-[100px] h-[100px] object-cover border-[3px] rounded-full left-1 absolute"/>
 
-            <Link to="/" className="text-[25px] font-bold m-1">Home</Link>
+            <Link to="/" className=
+            "text-[25px] font-bold m-1">Home</Link>
 
             <Link to ="/contact" className ="text-[25px] font-bold m-1">contact</Link>
 

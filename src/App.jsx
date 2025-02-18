@@ -12,7 +12,7 @@ function App() {
 
   return (
     <BrowserRouter>
-    <Toaster/>  {/* react toast allet pennanna ona nisa */}
+    <Toaster position='top-right'/>  {/* react toast allet pennanna ona nisa */}
 
       <Routes path="/*">
         <Route path="/login" element={<LoginPage/>}/>

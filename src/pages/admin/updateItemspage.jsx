@@ -1,18 +1,21 @@
 import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 
-export default function ProductAddingPage() {
+export default function UpdateItemspage() {
+    const location = useLocation();
+    console.log(location);
 
-    const [productKay, setProductKay] = useState("");
-    const [productName, setProductName] = useState("");
-    const [productPrice, setProductPrice] = useState(0);
-    const [productCategory, setProductCategory] = useState("");
-    const [productDimensions, setProductDimensions] = useState("");
-    const [productDescription, setProductDescription] = useState("");
+    const [productKay, setProductKay] = useState(location.state.product.key);
+    const [productName, setProductName] = useState(location.state.product.name);
+    const [productPrice, setProductPrice] = useState(location.state.product.price);
+    const [productCategory, setProductCategory] = useState(location.state.product.category);
+    const [productDimensions, setProductDimensions] = useState(location.state.product.dimensions);
+    const [productDescription, setProductDescription] = useState(location.state.product.description);
     const navigate = useNavigate();
+
 
     async function handleAddItem() {
         console.log(productKay, productName, productPrice, productCategory, productDimensions, productDescription);
@@ -22,8 +25,7 @@ export default function ProductAddingPage() {
             try {
 
 
-                const result = await axios.post("http://localhost:3000/api/products", {
-                    key : productKay,
+                const result = await axios.put("http://localhost:3000/api/products/"+productKay, {
                     name : productName,
                     price : productPrice,
                     category : productCategory,
@@ -56,9 +58,10 @@ export default function ProductAddingPage() {
 
     return (
         <div className="w-full h-full flex flex-col items-center">
-            <h1 className = "text-lg font-bold mb-4">Add Items</h1>
+            <h1 className = "text-lg font-bold mb-4">UpdateItems Items</h1>
             <div className="w-[400px] border flex flex-col">
                 <input
+                    disabled   // for can't change the value
                     onChange={(e) => setProductKay(e.target.value)}
                     type="text"
                     placeholder=" product kay"
@@ -103,7 +106,7 @@ export default function ProductAddingPage() {
                     className="w-full p-2 border rounded"
                 />
 
-                <button onClick={handleAddItem} className="border w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600">Add</button>
+                <button onClick={handleAddItem} className="border w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600">Update</button>
                 <button onClick={() => navigate("/admin/items")} className="border w-full p-2 bg-red-500 text-white rounded hover:bg-red-600">Cancel</button>
             </div>
         </div>

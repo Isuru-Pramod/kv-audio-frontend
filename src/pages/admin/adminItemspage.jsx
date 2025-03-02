@@ -1,107 +1,89 @@
-
-const testArr = [{
-    "key": "DH001",
-    "name": "Adjustable Dog Harness",
-    "price": 25.99,
-    "category": "Harnesses",
-    "dimensions": "M - 18-24 inches",
-    "description": "Durable and comfortable adjustable dog harness with reflective strips for safety.",
-    "availability": true,
-    "img": [
-        "https://example.com/dog-harness.jpg"
-    ]
-}, {
-    "key": "CS002",
-    "name": "Cat Scratching Post",
-    "price": 39.99,
-    "category": "Cages & Beds",
-    "dimensions": "24x12 inches",
-    "description": "Sturdy and durable scratching post to keep your cat entertained and protect your furniture.",
-    "availability": true,
-    "img": [
-        "https://example.com/cat-scratching-post.jpg"
-    ]
-},{
-    "key": "BC003",
-    "name": "Large Bird Cage",
-    "price": 59.99,
-    "category": "Cages & Beds",
-    "dimensions": "30x18x36 inches",
-    "description": "Spacious bird cage with multiple perches and a removable tray for easy cleaning.",
-    "availability": false,
-    "img": [
-        "https://example.com/bird-cage.jpg"
-    ]
-},{
-    "key": "DT004",
-    "name": "Rubber Dog Chew Toy",
-    "price": 9.99,
-    "category": "Pet Toys",
-    "dimensions": "5 inches",
-    "description": "Safe and durable chew toy designed to keep dogs engaged and help with dental health.",
-    "availability": true,
-    "img": [
-        "https://example.com/dog-chew-toy.jpg"
-    ]
-},{
-    "key": "CG005",
-    "name": "Self-Cleaning Cat Grooming Brush",
-    "price": 15.99,
-    "category": "Grooming Products",
-    "dimensions": "6 inches",
-    "description": "Gentle and effective grooming brush with retractable bristles for easy cleaning.",
-    "availability": true,
-    "img": [
-        "https://example.com/cat-grooming-brush.jpg"
-    ]
-}]
-
-
-
-
-
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { LuCirclePlus } from "react-icons/lu";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AdminItemsPage() {
-    const [items, setItems] = useState(testArr);
+    const [items, setItems] = useState([]);
+    const [itemsLoaded, setItemsLoaded] = useState(false);
+    const navigate = useNavigate();
+    useEffect(() => {
 
+        if (!itemsLoaded) {
+            const token = localStorage.getItem("token");
+            axios.get("http://localhost:3000/api/products", {
+                headers: {
+                    Authorization: "Bearer " + token,
+                }
+            }).then((res) => {
+                console.log(res.data);
+                setItems(res.data);
+                setItemsLoaded(true);
+            }).catch((err) => {
+                console.error(err);
+            })
+        }
+        ;
+    }, [itemsLoaded]); // if "itemsLoaded" is changed, this useEffect will run
+
+    const handleDelete = (key) => {
+        
+        if (window.confirm("Are you sure you want to delete this item?")) {
+            const token = localStorage.getItem("token");
+            axios.delete(`http://localhost:3000/api/products/${key}`, {
+                headers: {
+                    Authorization: "Bearer " + token,
+                }
+            }).then((res) => {
+                console.log(res.data);
+                setItemsLoaded(false);
+            }).catch((err) => {
+                console.log(err);
+            })
+        }
+
+    };
 
     return (
-        <div className="w-full h-full relative">
-            <table>
-                <thead>
-                    <th>key</th>
-                    <th>name</th>
-                    <th>price</th>
-                    <th>category</th>
-                    <th>dimensions</th>
-                    <th>availability</th>
-                </thead>
-                <tbody>
-                    {
-                        items.map((product) => {
-                            return (
-                                <tr key = {product.key}>
-                                    <td>{product.key}</td>
-                                    <td>{product.name}</td>
-                                    <td>{product.price}</td>
-                                    <td>{product.category}</td>
-                                    <td>{product.dimensions}</td>
-                                    <td>{product.availability ? "Available" : "Not Available"}</td>
-                                </tr>
-                            )
-                        })
-                    }
+        <div className="w-full h-full p-4 bg-gray-100 flex flex-col items-center">
+            {!itemsLoaded && <div className="border-4 my-4 border-b-green-500 rounded-full w-[100px] h-[100px] animate-spin"></div>} {/*if itemsLoaded is false, show the spinner*/}
+            {itemsLoaded && <div className="overflow-x-auto bg-white shadow-lg rounded- p-4">
+                <table className="w-full border-collapse text-left">
+                    <thead>
+                        <tr className="bg-gray-800 text-white uppercase text-sm">
+                            <th className="p-3">Key</th>
+                            <th className="p-3">Name</th>
+                            <th className="p-3">Price</th>
+                            <th className="p-3">Category</th>
+                            <th className="p-3">Dimensions</th>
+                            <th className="p-3">Availability</th>
+                            <th className="p-3 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {items.map((product) => (
+                            <tr key={product.key} className="border-b hover:bg-gray-50">
+                                <td className="p-3">{product.key}</td>
+                                <td className="p-3">{product.name}</td>
+                                <td className="p-3">${product.price.toFixed(2)}</td>
+                                <td className="p-3">{product.category}</td>
+                                <td className="p-3">{product.dimensions}</td>
+                                <td className={`p-3 font-bold ${product.availability ? 'text-green-600' : 'text-red-600'}`}>
+                                    {product.availability ? "Available" : "Not Available"}
+                                </td>
+                                <td className="p-3 flex gap-2 justify-center">
+                                    <button onClick={() => {navigate(`/admin/items/edit`, {state:{product}})}} className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-700">Edit</button>
+                                    <button onClick={() => handleDelete(product.key)} className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-700">Delete</button>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>}
 
-
-                </tbody>
-            </table>
-        <Link to="/admin/items/add">
-            <LuCirclePlus className="text-[70px] absolute right-4 bottom-4 hover:text-red-900"/>
-        </Link>
+            <Link to="/admin/items/add" className="fixed bottom-6 right-6">
+                <LuCirclePlus className="text-red-600 text-[70px] hover:text-red-800 transition duration-300" />
+            </Link>
         </div>
-    )
+    );
 }

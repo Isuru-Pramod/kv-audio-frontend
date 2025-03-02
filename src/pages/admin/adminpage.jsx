@@ -4,6 +4,7 @@ import { MdOutlineSpeaker } from "react-icons/md";
 import { Link, Route, Routes } from "react-router-dom";
 import AdminItemsPage from "./adminItemspage";
 import ProductAddingPage from "./addProductPage";
+import UpdateItemspage from "./updateItemspage";
 
 export default function AdminPage(){
     return(
@@ -26,13 +27,14 @@ export default function AdminPage(){
                     User
                 </button>
             </div>
-            <dev className="w-[calc(100vw-200px)] ">
+            <div className="w-[calc(100vw-200px)] ">
                 <Routes path="/*">
                     <Route path="/bookings/*" element={<h1>Booking</h1>}/>
                     <Route path="/items" element={<AdminItemsPage/>}/>
                     <Route path="/items/add" element={<ProductAddingPage/>}/>
+                    <Route path="/items/edit/" element={<UpdateItemspage/>}/>
                 </Routes>
-            </dev>
+            </div>
         </div>
     )
 }

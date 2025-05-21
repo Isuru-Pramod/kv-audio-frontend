@@ -14,8 +14,9 @@ export default function LoginPage() {
     function handleOnSubmit(e){ 
         e.preventDefault()
         console.log(email, password);
+        const backendUrl = import.meta.env.VITE_BACKEND_URL
 
-        axios.post("http://localhost:3000/api/users/login", {
+        axios.post(`http://localhost:5000/api/users/login`, {
             email: email,
             password: password  
         }).then((res)=>{
@@ -33,7 +34,7 @@ export default function LoginPage() {
 
         }).catch((err)=>{
             console.log(err);
-            toast.error(err.response.data.message);
+            toast.error(err?.response?.data?.message|| "Error");
         })
 
     }

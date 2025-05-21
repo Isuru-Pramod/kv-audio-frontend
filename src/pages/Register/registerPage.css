@@ -1,0 +1,23 @@
+.bg-pic{
+    background-image: url('./loginBG.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    position: relative;
+}
+.input-field {
+    width: 300px;
+    height: 30px;
+    background: transparent;
+    border-bottom: 2px solid white;
+    color: white;
+    font-size: 1.2rem;
+    outline: none;
+    margin-top: 20px;
+
+}
+
+.input-field::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}

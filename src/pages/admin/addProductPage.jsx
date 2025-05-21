@@ -22,7 +22,7 @@ export default function ProductAddingPage() {
             try {
 
 
-                const result = await axios.post("http://localhost:3000/api/products", {
+                const result = await axios.post(`http://localhost:5000/api/products`, {
                     key : productKay,
                     name : productName,
                     price : productPrice,

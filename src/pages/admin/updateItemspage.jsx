@@ -25,7 +25,7 @@ export default function UpdateItemspage() {
             try {
 
 
-                const result = await axios.put("http://localhost:3000/api/products/"+productKay, {
+                const result = await axios.put(`http://localhost:5000/api/products/${productKay}`, {
                     name : productName,
                     price : productPrice,
                     category : productCategory,

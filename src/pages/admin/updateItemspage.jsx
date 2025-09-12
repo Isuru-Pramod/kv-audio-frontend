@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
+import mediaUpload from "../../utils/midiaUplord";
 
 
 export default function UpdateItemspage() {
@@ -14,10 +15,24 @@ export default function UpdateItemspage() {
     const [productCategory, setProductCategory] = useState(location.state.product.category);
     const [productDimensions, setProductDimensions] = useState(location.state.product.dimensions);
     const [productDescription, setProductDescription] = useState(location.state.product.description);
+    const [productImages, setProductImages] = useState([]);
     const navigate = useNavigate();
 
 
-    async function handleAddItem() {
+    async function handleUpdateItem() {
+
+        let updatingImages = location.state.img;
+        
+        const promises = []; 
+
+        for (let i=0; i<productImages.length; i++) {
+            console.log(productImages[i]);
+            const promise = mediaUpload(productImages[i]);
+            promises.push(promise);
+        }
+
+        updatingImages = await Promise.all(promises);
+  
         console.log(productKay, productName, productPrice, productCategory, productDimensions, productDescription);
 
         const token = localStorage.getItem("token");
@@ -30,7 +45,8 @@ export default function UpdateItemspage() {
                     price : productPrice,
                     category : productCategory,
                     dimensions : productDimensions,
-                    description : productDescription
+                    description : productDescription,
+                    img : updatingImages,
                 }, {
                     headers : {
                         Authorization: "Bearer " + token,
@@ -105,8 +121,9 @@ export default function UpdateItemspage() {
                     value={productDescription}
                     className="w-full p-2 border rounded"
                 />
+                <input type="file" multiple onChange={(e) => {setProductImages(e.target.files)}} className="w-full p-2 border rounded" /> 
 
-                <button onClick={handleAddItem} className="border w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600">Update</button>
+                <button onClick={handleUpdateItem} className="border w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600">Update</button>
                 <button onClick={() => navigate("/admin/items")} className="border w-full p-2 bg-red-500 text-white rounded hover:bg-red-600">Cancel</button>
             </div>
         </div>

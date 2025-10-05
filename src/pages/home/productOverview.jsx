@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import ImageSlider from "../../components/imageSlider";
+import { addToCart, loadCart } from "../../utils/cart";
 
 export default function ProductOverview(){
     const params = useParams();
@@ -31,7 +32,7 @@ return (
 				<div className=" w-full h-full  flex  flex-col md:flex-row justify-center items-center">
 					<h1 className="text-2xl my-6 md:hidden  font-bold text-accent text-center ">{product.name}</h1>
                     <div className="w-full md:w-[49%]">
-						<ImageSlider images={product.image} />
+						<ImageSlider images={product.img} />
 					</div>
 					<div className="w-full md:w-[49%] p-2 flex flex-col items-center">
 						<h1 className="hidden md:block text-3xl font-bold text-accent">{product.name}</h1>

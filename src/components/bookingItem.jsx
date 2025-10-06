@@ -10,7 +10,7 @@ export default function BookingItem({ itemKey, qty, refresh }) {
 	useEffect(() => {
 		if (status === "loading") {
 			axios
-				.get(`${import.meta.env.VITE_BACKEND_URL}/api/products/${itemKey}`)
+				.get(`http://localhost:5000/api/products/${itemKey}`)
 				.then((res) => {
 					setItem(res.data);
 					setStatus("success");
@@ -43,7 +43,7 @@ export default function BookingItem({ itemKey, qty, refresh }) {
             </div>
 			{/* Product Image */}
 			<img
-				src={item.image[0]}
+				src={item.img[0]}
 				alt={item.name}
 				className="w-20 h-20 object-cover rounded-lg border border-secondary"
 			/>

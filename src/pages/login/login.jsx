@@ -120,7 +120,7 @@ export default function LoginPage() {
         onClick={googleLogin}
         className="w-full h-[50px] flex justify-center items-center bg-white/20 hover:bg-white/30 text-white text-lg font-semibold rounded-lg cursor-pointer shadow-lg transition-all duration-300"
       >
-        <img src="/google-icon.png" alt="Google" className="w-6 h-6 mr-3" />
+        <img src="/google-icon.png" alt="Google" className="w-6 h-6 mr-3"/>
         Login with Google
       </div>
 

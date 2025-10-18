@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function ProductCard({ item }) {
   return (
-    <div className="relative w-[300px] bg-white/90 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl border border-gray-200 hover:border-yellow-400 transition-all duration-300 overflow-hidden group">
+    <div className="relative w-[300px] bg-gray-300 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl border border-gray-200 hover:border-yellow-400 transition-all duration-300 overflow-hidden group">
       {/* Product Image */}
       <div className="relative w-full h-52 overflow-hidden rounded-t-2xl">
         <img

@@ -24,13 +24,13 @@ export default function Items() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-100 via-slate-200 to-slate-300 pt-24 pb-16 w-screen h-max">
+    <div className="min-h-screen bg-gradient-to-br from-slate-800 to-slate-900 pt-24 pb-16 w-screen h-max">
       {/* Header Section */}
       <div className="text-center mb-10">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-gray-800 tracking-wide drop-shadow-lg">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-yellow-400 tracking-wide drop-shadow-lg">
           Our Audio Collection
         </h1>
-        <p className="text-gray-600 mt-3 text-lg">
+        <p className="text-gray-100 mt-3 text-lg">
           Explore premium-quality audio equipment available for rent at <span className="font-semibold text-yellow-600">KV Audio</span>.
         </p>
         <div className="w-24 h-1 bg-yellow-400 mx-auto mt-3 rounded-full"></div>

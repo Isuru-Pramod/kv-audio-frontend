@@ -5,7 +5,7 @@ export default function ImageSlider(props){
     console.log(images);
     const [selectedImage, setSelectedImage] = useState(images[0]);
     return(
-        <div className="w-full flex flex-col items-center ">
+        <div className="w-full flex flex-col items-center">
             <img src={selectedImage} alt="product" className="w-full h-[300px] md:h-[500px] object-cover"/>
             <div className="w-full mt-[20px] h-[90px] flex justify-center items-center">
                 {

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 export default function ProductCard({ item }) {
     return (
         <div className="relative w-[300px] h-[520px] bg-white rounded-2xl shadow-lg border border-gray-100 hover:scale-105 transition-transform duration-300">
@@ -42,9 +44,9 @@ export default function ProductCard({ item }) {
                 </div>
 
                 {/* Add to Cart Button */}
-                <button className="mt-auto w-full py-2 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold shadow-md hover:from-blue-600 hover:to-indigo-700 transition-colors duration-300">
-                    Add to Cart 
-                </button>
+                <Link to={"/product/"+item.key} className="text-center mt-auto w-full py-2 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold shadow-md hover:from-blue-600 hover:to-indigo-700 transition-colors duration-300">
+                    View Detailsss
+                </Link>
             </div>
         </div>
     );

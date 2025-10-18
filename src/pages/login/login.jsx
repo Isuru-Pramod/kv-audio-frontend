@@ -36,13 +36,12 @@ export default function LoginPage() {
             console.log(err);
             toast.error(err?.response?.data?.message|| "Error");
         })
-
     }
 
     return(
     <div className="bg-pic w-full h-screen flex justify-center items-center">
         <form onSubmit={handleOnSubmit}>
-        <div className="w-[400px] h-[400px] backdrop-blur-2xl rounded-2xl flex flex-col justify-center items-center relative">
+        <div className="w-[400px] h-[250px] backdrop-blur-2xl rounded-2xl flex flex-col justify-center items-center relative">
             <img src="/images-removebg-preview.png" alt="logo" className="w-[100px] h-[100px] object-cover"/>
 
             <input type="email"   

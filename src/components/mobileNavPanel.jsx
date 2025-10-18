@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 
 export default function MobileNavPanel({ isOpen, setOpen }) {
   const navigate = useNavigate();
+
   function goTo(route) {
     navigate(route);
     setOpen(false);

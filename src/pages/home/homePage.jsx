@@ -12,7 +12,7 @@ export default function HomePage(){
     return(
         <>
             <Header/>
-            <div className="h-[calc(100vh-100px)] w-full flex bg-primary">
+            <div className="h-[calc(100vh-100px)] w-full flex  pt-16">
 
                 <Routes path="/*">
                     <Route path="/contact" element={<Contact/>}/>

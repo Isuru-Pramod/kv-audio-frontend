@@ -41,7 +41,7 @@ export default function ProductOverview() {
             <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center p-4">
                 <div className="text-center">
                     <div className="w-20 h-20 border-4 border-blue-200 border-t-accent animate-spin rounded-full mx-auto mb-4"></div>
-                    <p className="text-gray-600 text-lg font-medium">Loading amazing product...</p>
+                    <p className="text-gray-600 text-lg font-medium">Loading amazing product....</p>
                 </div>
             </div>
         );

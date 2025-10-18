@@ -1,3 +1,5 @@
+import Footer from "../../components/Footer";
+
 export default function Home() {
     const navpage = "home";
   return (
@@ -93,11 +95,7 @@ export default function Home() {
           Contact Us
         </button>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-black text-center py-6 text-gray-400 text-sm">
-        © {new Date().getFullYear()} KV Audio • All Rights Reserved
-      </footer>
+      <Footer/>
     </div>
   );
 }

@@ -18,15 +18,16 @@ export default function MobileNavPanel({ isOpen, setOpen }) {
         <div className="w-full h-screen fixed top-0 left-0 bg-black/60 backdrop-blur-sm z-50 flex">
           {/* Sidebar */}
           <div className="h-full bg-white w-[300px] shadow-2xl animate-slide-in relative flex flex-col">
+            
             {/* Header */}
-            <div className="bg-gradient-to-r from-yellow-400 to-orange-500 w-full h-[80px] flex items-center justify-center relative shadow-md">
+            <div className="bg-accent w-full h-[80px] flex items-center justify-center relative shadow-md">
               <img
                 src="/images-removebg-preview.png"
                 alt="logo"
                 className="w-[65px] h-[65px] object-cover border-[3px] border-white rounded-full shadow-lg absolute left-3"
               />
               <h2 className="text-white text-2xl font-bold drop-shadow-md tracking-wide">
-                KV Adio
+                LuxeVista
               </h2>
               <IoMdClose
                 className="absolute right-4 text-3xl text-white cursor-pointer hover:rotate-90 transition-all duration-300"
@@ -48,9 +49,9 @@ export default function MobileNavPanel({ isOpen, setOpen }) {
                   key={index}
                   onClick={() => goTo(item.path)}
                   className="flex items-center gap-3 text-[20px] text-gray-700 px-3 py-3 rounded-lg cursor-pointer
-                            hover:bg-yellow-100 hover:text-yellow-600 transition-all duration-300"
+                            hover:bg-accent/10 hover:text-accent transition-all duration-300"
                 >
-                  <span className="text-yellow-500">{item.icon}</span>
+                  <span className="text-accent">{item.icon}</span>
                   <span className="font-semibold">{item.label}</span>
                 </div>
               ))}
@@ -62,7 +63,7 @@ export default function MobileNavPanel({ isOpen, setOpen }) {
             </div>
           </div>
 
-          {/* Animation keyframe */}
+          {/* Animation keyframes */}
           <style>
             {`
               @keyframes slideIn {

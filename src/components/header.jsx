@@ -79,6 +79,28 @@ export default function Header() {
         </button>
       )}
 
+        {!token && (
+          <div className="flex items-center gap-3">
+          <button
+          onClick={() => {
+            window.location.href = "/login";
+          }}
+          className="hidden md:block text-sm font-semibold px-4 py-2 bg-yellow-400 text-[#1e293b] rounded-lg hover:bg-yellow-300 transition-all duration-300"
+        >
+          Login
+        </button>
+        <button
+          onClick={() => {
+            window.location.href = "/register";
+          }}
+          className="hidden md:block text-sm font-semibold px-4 py-2 bg-white text-[#1e293b] rounded-lg hover:bg-blue-600 transition-all duration-300"
+        >
+sign in 
+        </button>
+        </div>
+
+      )}
+
       {/* Hamburger Menu for Mobile */}
       <GiHamburgerMenu
         className="md:hidden text-[26px] cursor-pointer hover:text-yellow-400 transition-all duration-300"

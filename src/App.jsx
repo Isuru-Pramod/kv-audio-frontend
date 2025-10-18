@@ -18,7 +18,7 @@ function App() {
     <GoogleOAuthProvider clientId="124973146763-ittb8km299j5ebrirb0o6ismkupu0f5g.apps.googleusercontent.com" >
     <BrowserRouter>
     <Toaster position='top-right'/>  {/* react toast allet pennanna ona nisa */}
-
+    <div className='bg-gray-100 h-screen'>
       <Routes path="/*">
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/admin/*" element={<AdminPage/>}/>
@@ -27,6 +27,7 @@ function App() {
         <Route path="/*" element={<HomePage/>}/>
 
       </Routes>
+    </div>
     </BrowserRouter>
     </GoogleOAuthProvider>
 

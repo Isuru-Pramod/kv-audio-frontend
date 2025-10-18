@@ -21,7 +21,7 @@ export default function Items(){
         } 
     },[])
     return(
-        <div className="w-full h-full  flex flex-wrap justify-center pt-[50px]">
+        <div className="w-full h-max  flex flex-wrap justify-center pt-[50px] gap-[20px] mx-[5px] bg-slate-100">
             {
                 state === "loading"&&
                 <div className="w-full h-full  flex justify-center items-center">

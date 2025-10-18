@@ -44,7 +44,7 @@ export default function ProductCard({ item }) {
                 </div>
 
                 {/* Add to Cart Button */}
-                <Link to={"/product/"+item.key} className="text-center mt-auto w-full py-2 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold shadow-md hover:from-blue-600 hover:to-indigo-700 transition-colors duration-300">
+                <Link to={"/product/"+item.key} className="text-center mt-auto w-full py-2 rounded-xl bg-yellow-500 text-amber-950 font-semibold shadow-md hover:bg-yellow-400 transition-colors duration-300">
                     View Detailsss
                 </Link>
             </div>

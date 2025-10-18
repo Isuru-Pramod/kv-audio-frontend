@@ -6,7 +6,7 @@ const supabase_url = "https://knmtrzeeehxkfiwfyvbe.supabase.co";
 
 const supabase = createClient(supabase_url,anon_key)
 
-export default function mediaUplload(file){
+export default function mediaUpload(file){
 
     return new Promise((resolve, reject)=> {
         if (file == null){

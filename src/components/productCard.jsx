@@ -43,7 +43,7 @@ export default function ProductCard({ item }) {
 
                 {/* Add to Cart Button */}
                 <button className="mt-auto w-full py-2 rounded-xl bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-semibold shadow-md hover:from-blue-600 hover:to-indigo-700 transition-colors duration-300">
-                    Add to Cart
+                    Add to Cart 
                 </button>
             </div>
         </div>

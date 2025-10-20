@@ -1,5 +1,6 @@
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import Footer from "../../components/Footer";
 
 export default function Contact() {
       const [formData, setFormData] = useState({
@@ -40,7 +41,8 @@ export default function Contact() {
   };
 
   return (
-    <div className="bg-gray-950 text-white min-h-screen flex flex-col items-center py-12 px-6 md:px-16 w-screen h-max">
+    <div>
+      <div className="bg-gray-950 text-white min-h-screen flex flex-col items-center py-12 px-6 md:px-16 w-screen h-max pt-[100px]">
       {/* Header */}
       <h1 className="text-5xl font-extrabold text-yellow-400 mb-6 text-center tracking-wide">
         Contact <span className="text-white">KV Audio</span>
@@ -132,10 +134,10 @@ export default function Contact() {
         </div>
       </div>
 
-      {/* Footer Section */}
-      <div className="mt-16 text-center text-gray-400 text-sm border-t border-gray-800 pt-6">
-        © {new Date().getFullYear()} KV Audio — All Rights Reserved.
-      </div>
+      
     </div>
+    <Footer/>
+    </div>
+    
   );
 }

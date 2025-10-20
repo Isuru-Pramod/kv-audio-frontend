@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import ProductCard from "../../components/productCard";
+import Footer from "../../components/Footer";
 
 export default function Items() {
   const [state, setState] = useState("loading"); // loading, success, error
@@ -24,7 +25,8 @@ export default function Items() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-800 to-slate-900 pt-24 pb-16 w-screen h-max">
+    <div>
+      <div className="min-h-screen bg-gradient-to-br from-slate-800 to-slate-900 pt-24 pb-16 w-screen h-max">
       {/* Header Section */}
       <div className="text-center mb-10">
         <h1 className="text-4xl md:text-5xl font-extrabold text-yellow-400 tracking-wide drop-shadow-lg">
@@ -81,6 +83,10 @@ export default function Items() {
           )}
         </div>
       )}
+      
     </div>
+    <Footer/>
+    </div>
+    
   );
 }

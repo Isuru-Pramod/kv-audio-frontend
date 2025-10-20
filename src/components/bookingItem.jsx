@@ -50,24 +50,25 @@ export default function BookingItem({ itemKey, qty, refresh }) {
 
 			{/* Product Details */}
 			<div className="flex flex-row items-center relative  w-full">
-				<h3 className="text-lg font-semibold text-accent">{item.name}</h3>
+				<h3 className="text-lg font-semibold text-gray-200">{item.name}</h3>
 				<div className="flex absolute right-0 gap-4">
-					<p className="font-medium w-[70px] text-center">
+					<p className="font-medium text-gray-200 w-[70px] text-center">
 						{item.price.toFixed(2)}
 					</p>
-					<p className=" font-medium w-[40px] text-center relative flex justify-center items-center">
+					<p className=" font-medium w-[40px] text-center text-gray-200 relative flex justify-center items-center">
 						<button
-							className="absolute top-[-20px] hover:text-accent"
+							className="absolute top-[-20px] hover:text-gray-200"
 							onClick={() => {
 								addToCart(itemKey, 1);
 								refresh();
 							}}
 						>
-							<FaArrowUp />
+							<FaArrowUp 
+							className="text-yellow-600" />
 						</button>
 						{qty}
 						<button
-							className="absolute bottom-[-20px] hover:text-accent"
+							className="absolute bottom-[-20px] hover:text-gray-200"
 							onClick={() => {
 								if (qty == 1) {
 									removeFromCart(itemKey);
@@ -78,10 +79,10 @@ export default function BookingItem({ itemKey, qty, refresh }) {
 								}
 							}}
 						>
-							<FaArrowDown />
+							<FaArrowDown className="text-yellow-600" />
 						</button>
 					</p>
-					<p className="text-lg font-semibold text-accent">
+					<p className="text-lg font-semibold text-yellow-500">
 						{(item.price * qty).toFixed(2)}
 					</p>
 				</div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import Footer from "../../components/Footer";
 
 export default function Gallery() {
   const images = [
@@ -31,7 +32,8 @@ export default function Gallery() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 py-16 px-6 text-gray-100 w-screen h-max">
+    <div>
+        <div className="min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-800 py-16 px-6 text-gray-100 w-screen h-max pt-[100px]">
       {/* Header */}
       <div className="max-w-6xl mx-auto text-center mb-12">
         <h1 className="text-4xl md:text-5xl font-extrabold text-yellow-400 mb-4 drop-shadow-lg">
@@ -120,6 +122,10 @@ export default function Gallery() {
       <div className="text-center mt-16 text-gray-500">
         <p className="italic">✨ Where sound meets light — every frame tells a story.</p>
       </div>
+      
     </div>
+    <Footer/>
+    </div>
+    
   );
 }

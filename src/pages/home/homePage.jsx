@@ -7,12 +7,13 @@ import Home from "./home";
 import ErrorNotfound from "./error";
 import ProductOverview from "./productOverview";
 import BookingPage from "./bookingPage";
+import Reviws from "./reviews";
 
 export default function HomePage(){
     return(
         <>
             <Header/>
-            <div className="h-[calc(100vh-100px)] w-full flex  pt-16">
+            <div className="h-[calc(100vh-100px)] w-full flex">
 
                 <Routes path="/*">
                     <Route path="/contact" element={<Contact/>}/>
@@ -20,6 +21,7 @@ export default function HomePage(){
                     <Route path="/hallery" element={<Gallery/>}/>
                     <Route path="/items" element={<Items/>}/>
                     <Route path="/gallery" element={<Gallery/>}/>
+                    <Route path="/reviws" element={<Reviws/>}/>
                     <Route path="/product/:key" element={<ProductOverview/>}/>
                     <Route path="/" element={<Home/>}/>
 

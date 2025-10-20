@@ -8,7 +8,9 @@ import UpdateItemPage from "./updateItemspage";
 import AdminUsersPage from "./adminUsersPage";
 import AdminOrdersPage from "./adminBookingPage";
 import { useEffect, useState } from "react";
+import { MdOutlineRateReview } from "react-icons/md";
 import axios from "axios";
+import AdminReviewPage from "./adminReviewPage";
 
 export default function AdminPage(){
   const [userValidated, setUserValidated] = useState(false);
@@ -54,6 +56,10 @@ export default function AdminPage(){
           <FaRegUser/>
           Users
         </Link>
+          <Link to="/admin/reviews" className="w-full h-[40px] text-[25px] font-bold flex justify-center items-center">
+          <MdOutlineRateReview />
+          Reviews
+        </Link>
 
       </div>
       <div className="w-[calc(100vw-200px)] ">
@@ -61,6 +67,7 @@ export default function AdminPage(){
           <Route path="/orders" element={<AdminOrdersPage/>}/>
           <Route path="/users" element={<AdminUsersPage/>}/>
           <Route path="/items" element={<AdminItemsPage/>}/> 
+          <Route path="/reviews" element={<AdminReviewPage/>}/>
           <Route path="/items/add" element={<ProductAddingPage/>}/>
           <Route path="/items/edit" element={<UpdateItemPage/>}/>
         </Routes>}

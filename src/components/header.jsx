@@ -54,7 +54,15 @@ export default function Header() {
           className="relative text-lg font-medium hover:text-yellow-400 transition-all duration-300 group"
         >
           Items
-          <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 transition-all duration-300 group-hover:w-full"></span>
+          <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 transition-all duration-300 group-hover:w-full"></span> 
+        </Link>
+
+        <Link
+          to="/reviws"
+          className="relative text-lg font-medium hover:text-yellow-400 transition-all duration-300 group"
+        >
+          Reviws
+          <span className="absolute left-0 -bottom-1 w-0 h-[2px] bg-yellow-400 transition-all duration-300 group-hover:w-full"></span> 
         </Link>
 
         <Link

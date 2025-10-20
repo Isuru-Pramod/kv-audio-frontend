@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export default function ProductCard({ item }) {
   return (
-    <div className="relative w-[300px] bg-gray-300 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl border border-gray-200 hover:border-yellow-400 transition-all duration-300 overflow-hidden group">
+    <div className="relative w-[300px] bg-gray-700 backdrop-blur-sm rounded-2xl shadow-xl hover:shadow-2xl border border-gray-600 hover:border-yellow-400 transition-all duration-300 overflow-hidden group">
       {/* Product Image */}
       <div className="relative w-full h-52 overflow-hidden rounded-t-2xl">
         <img
@@ -18,7 +18,7 @@ export default function ProductCard({ item }) {
       <div className="p-5 flex flex-col h-[360px]">
         {/* Title and Price */}
         <div>
-          <h2 className="text-xl font-extrabold text-gray-900 group-hover:text-yellow-600 transition-colors duration-300">
+          <h2 className="text-xl font-bold text-gray-300 group-hover:text-yellow-600 transition-colors duration-300">
             {item.name}
           </h2>
           <p className="text-lg text-yellow-600 font-semibold mt-1">
@@ -27,21 +27,21 @@ export default function ProductCard({ item }) {
         </div>
 
         {/* Details */}
-        <div className="mt-3 text-sm text-gray-600 space-y-1">
+        <div className="mt-3 text-sm text-gray-200 space-y-1">
           <p>
-            <span className="font-semibold text-gray-700">Category:</span>{" "}
+            <span className="font-semibold text-gray-200">Category:</span>{" "}
             {item.category}
           </p>
           {item.dimensions && (
             <p>
-              <span className="font-semibold text-gray-700">Dimensions:</span>{" "}
+              <span className="font-semibold text-gray-200">Dimensions:</span>{" "}
               {item.dimensions}
             </p>
           )}
         </div>
 
         {/* Description */}
-        <p className="mt-3 text-gray-700 text-sm leading-snug">
+        <p className="mt-3 text-gray-200 text-sm leading-snug">
           {item.description.length > 90
             ? item.description.slice(0, 90) + "..."
             : item.description}
@@ -52,7 +52,7 @@ export default function ProductCard({ item }) {
           <span
             className={`inline-block px-3 py-1 text-xs font-medium rounded-full shadow-sm ${
               item.availability
-                ? "bg-green-100 text-green-700"
+                ? "bg-green-300 text-green-950"
                 : "bg-red-100 text-red-700"
             }`}
           >

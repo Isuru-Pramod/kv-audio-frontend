@@ -68,41 +68,41 @@ export default function BookingPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 flex flex-col items-center py-10 px-4 w-screen h-max">
-      <div className="w-full max-w-4xl bg-gray-300 rounded-2xl shadow-lg p-8">
-        <h1 className="text-3xl font-bold text-yellow-600 text-center mb-6">
+    <div className="min-h-screen bg-gray-900 flex flex-col items-center py-10 px-4 w-screen h-max pt-32">
+      <div className="w-full max-w-4xl bg-gray-700 rounded-2xl shadow-lg p-8">
+        <h1 className="text-3xl font-bold text-yellow-400 text-center mb-6">
           Create Your Booking
         </h1>
 
         {/* Date Selection */}
         <div className="flex flex-col md:flex-row justify-center gap-8 mb-8">
           <div className="flex flex-col">
-            <label className="font-semibold text-gray-700 mb-1">
+            <label className="font-semibold text-gray-200 mb-1">
               Starting Date:
             </label>
             <input
               type="date"
               value={startingDate}
               onChange={(e) => setStartingDate(e.target.value)}
-              className="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-yellow-400 outline-none"
+              className="border border-gray-300 rounded-md p-2 focus:ring-2 bg-gray-500 focus:ring-yellow-400 outline-none"
             />
           </div>
           <div className="flex flex-col">
-            <label className="font-semibold text-gray-700 mb-1">
+            <label className="font-semibold text-gray-200 mb-1">
               Ending Date:
             </label>
             <input
               type="date"
               value={endingDate}
               onChange={(e) => setEndingDate(e.target.value)}
-              className="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-yellow-400 outline-none"
+              className="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-yellow-400 outline-none bg-gray-500"
             />
           </div>
         </div>
 
-        <p className="text-center text-gray-700 font-medium mb-6">
+        <p className="text-center text-gray-200 font-medium mb-6">
           Total Days:{" "}
-          <span className="text-yellow-600 font-semibold">{daysBetween}</span>
+          <span className="text-yellow-500 font-semibold">{daysBetween}</span>
         </p>
 
         {/* Booking Items */}
@@ -117,7 +117,7 @@ export default function BookingPage() {
               />
             ))
           ) : (
-            <p className="text-center text-gray-500 italic">
+            <p className="text-center text-gray-200 italic">
               Your cart is empty.
             </p>
           )}
@@ -125,9 +125,9 @@ export default function BookingPage() {
 
         {/* Total + Button */}
         <div className="mt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-2xl font-semibold text-gray-800">
+          <p className="text-2xl font-semibold text-gray-200">
             Total:{" "}
-            <span className="text-gray-600">
+            <span className="text-yellow-400">
               Rs. {total ? total.toFixed(2) : "0.00"}
             </span>
           </p>

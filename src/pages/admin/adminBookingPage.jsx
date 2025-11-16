@@ -41,19 +41,42 @@ export default function AdminOrdersPage() {
     }
   };
 
+  const StatusBadge = ({ status }) => {
+    const statusStyles = {
+      approved: "bg-green-700 text-green-200",
+      Rejected: "bg-red-700 text-red-200",
+      pending: "bg-yellow-700 text-yellow-200",
+    };
+
+    return (
+      <span
+        className={`px-3 py-1 rounded-full text-xs font-semibold capitalize ${
+          statusStyles[status] || "bg-gray-700 text-gray-300"
+        }`}
+      >
+        {status}
+      </span>
+    );
+  };
+
   return (
-    <div className="p-6 text-gray-100 bg-gray-950 min-h-screen">
-      <h1 className="text-3xl font-bold mb-6 text-yellow-400 tracking-wide">
+    <div className="p-4 sm:p-6 text-gray-100 bg-gray-950 min-h-screen">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-6 text-yellow-400 tracking-wide">
         Orders Management
       </h1>
 
+      {/* Loading */}
       {loading ? (
-        <p className="text-center text-gray-400 text-lg">Loading orders...</p>
+		<div className="flex justify-center items-center h-[300px]">
+			<div className="border-4 border-gray-700 border-t-blue-500 rounded-full w-20 h-20 animate-spin"></div>
+		</div>
       ) : orders.length === 0 ? (
         <p className="text-center text-gray-500">No orders found.</p>
       ) : (
         <div className="overflow-x-auto rounded-lg shadow-lg">
-          <table className="min-w-full border-collapse bg-gray-900 text-sm">
+
+          {/* Desktop Table */}
+          <table className="hidden md:table min-w-full border-collapse text-sm">
             <thead className="bg-gray-800 text-yellow-400">
               <tr>
                 <th className="px-4 py-3 text-left">Order ID</th>
@@ -88,16 +111,8 @@ export default function AdminOrdersPage() {
                   <td className="px-4 py-2 font-semibold text-yellow-300">
                     {order.totalAmount.toFixed(2)}
                   </td>
-                  <td
-                    className={`px-4 py-2 font-semibold ${
-                      order.status === "approved"
-                        ? "text-green-400"
-                        : order.status === "Rejected"
-                        ? "text-red-400"
-                        : "text-gray-400"
-                    }`}
-                  >
-                    {order.status}
+                  <td className="px-4 py-2">
+                    <StatusBadge status={order.status} />
                   </td>
                   <td className="px-4 py-2">
                     {new Date(order.orderDate).toLocaleDateString()}
@@ -106,75 +121,85 @@ export default function AdminOrdersPage() {
               ))}
             </tbody>
           </table>
+
+          {/* Mobile Cards */}
+          <div className="md:hidden space-y-4">
+            {orders.map((order) => (
+              <div
+                key={order._id}
+                onClick={() => {
+                  setActiveOrder(order);
+                  setModalOpened(true);
+                }}
+                className="bg-gray-900 rounded-xl p-4 border border-gray-800 shadow hover:bg-gray-800 transition cursor-pointer"
+              >
+                <div className="flex justify-between items-center mb-2">
+                  <h3 className="font-semibold text-yellow-300">
+                    Order #{order.orderId}
+                  </h3>
+                  <StatusBadge status={order.status} />
+                </div>
+
+                <p className="text-sm text-gray-400">Email: {order.email}</p>
+                <p className="text-sm text-gray-400">Days: {order.days}</p>
+                <p className="text-sm text-gray-400">
+                  Start: {new Date(order.startingDate).toLocaleDateString()}
+                </p>
+                <p className="text-sm text-gray-400">
+                  End: {new Date(order.endingDate).toLocaleDateString()}
+                </p>
+                <p className="text-yellow-300 font-bold mt-1">
+                  LKR {order.totalAmount.toFixed(2)}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
+      {/* ===== Modal ===== */}
       {modalOpened && activeOrder && (
-        <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 p-4">
-          <div className="w-full max-w-lg bg-gray-900 rounded-xl shadow-2xl p-6 relative text-gray-100">
+        <div className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50 p-3 overflow-auto">
+          <div className="w-full max-w-lg bg-gray-900 rounded-xl shadow-2xl p-5 relative text-gray-100">
+
             <IoMdCloseCircleOutline
-              className="absolute top-4 right-4 text-3xl cursor-pointer hover:text-red-500 transition"
+              className="absolute top-3 right-3 text-3xl cursor-pointer hover:text-red-500 transition"
               onClick={() => setModalOpened(false)}
             />
 
-            <h2 className="text-2xl font-semibold mb-4 text-yellow-400">
+            <h2 className="text-xl sm:text-2xl font-semibold mb-3 text-yellow-400">
               Order Details
             </h2>
 
             <div className="space-y-2 text-sm">
+              <p><span className="font-semibold">Order ID:</span> {activeOrder.orderId}</p>
+              <p><span className="font-semibold">Email:</span> {activeOrder.email}</p>
+              <p><span className="font-semibold">Days:</span> {activeOrder.days}</p>
               <p>
-                <span className="font-semibold text-gray-300">Order ID:</span>{" "}
-                {activeOrder.orderId}
-              </p>
-              <p>
-                <span className="font-semibold text-gray-300">Email:</span>{" "}
-                {activeOrder.email}
-              </p>
-              <p>
-                <span className="font-semibold text-gray-300">Days:</span>{" "}
-                {activeOrder.days}
-              </p>
-              <p>
-                <span className="font-semibold text-gray-300">
-                  Starting Date:
-                </span>{" "}
+                <span className="font-semibold">Starting Date:</span>{" "}
                 {new Date(activeOrder.startingDate).toLocaleDateString()}
               </p>
               <p>
-                <span className="font-semibold text-gray-300">Ending Date:</span>{" "}
+                <span className="font-semibold">Ending Date:</span>{" "}
                 {new Date(activeOrder.endingDate).toLocaleDateString()}
               </p>
               <p>
-                <span className="font-semibold text-gray-300">Total:</span>{" "}
-                LKR {activeOrder.totalAmount.toFixed(2)}
+                <span className="font-semibold">Total:</span> LKR{" "}
+                {activeOrder.totalAmount.toFixed(2)}
               </p>
               <p>
-                <span className="font-semibold text-gray-300">Status:</span>{" "}
-                <span
-                  className={`${
-                    activeOrder.status === "approved"
-                      ? "text-green-400"
-                      : activeOrder.status === "Rejected"
-                      ? "text-red-400"
-                      : "text-yellow-300"
-                  } font-semibold`}
-                >
-                  {activeOrder.status}
-                </span>
-              </p>
-              <p>
-                <span className="font-semibold text-gray-300">Order Date:</span>{" "}
+                <span className="font-semibold">Order Date:</span>{" "}
                 {new Date(activeOrder.orderDate).toLocaleDateString()}
               </p>
             </div>
 
             {/* Action Buttons */}
-            <div className="flex justify-center gap-4 mt-6">
+            <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
               <button
                 onClick={() =>
                   handleOrderStatusChange(activeOrder.orderId, "approved")
                 }
-                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md font-semibold transition-all duration-200"
+                className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-md font-semibold transition w-full sm:w-auto"
               >
                 Approve
               </button>
@@ -182,17 +207,18 @@ export default function AdminOrdersPage() {
                 onClick={() =>
                   handleOrderStatusChange(activeOrder.orderId, "Rejected")
                 }
-                className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-md font-semibold transition-all duration-200"
+                className="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-md font-semibold transition w-full sm:w-auto"
               >
                 Reject
               </button>
             </div>
 
-            {/* Product List */}
+            {/* Ordered Items List */}
             <div className="mt-6 border-t border-gray-700 pt-4 overflow-x-auto">
               <h3 className="text-lg font-semibold mb-2 text-yellow-400">
                 Ordered Items
               </h3>
+
               <table className="w-full text-sm text-left border-collapse">
                 <thead className="bg-gray-800">
                   <tr>
@@ -202,6 +228,7 @@ export default function AdminOrdersPage() {
                     <th className="px-3 py-2">Price</th>
                   </tr>
                 </thead>
+
                 <tbody>
                   {activeOrder.orderedItems.map((item, idx) => (
                     <tr
@@ -223,6 +250,7 @@ export default function AdminOrdersPage() {
                     </tr>
                   ))}
                 </tbody>
+
               </table>
             </div>
           </div>

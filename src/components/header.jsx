@@ -1,12 +1,30 @@
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import { FaCartShopping } from "react-icons/fa6";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import MobileNavPanel from "./mobileNavPanel";
+import { FaUserCircle } from "react-icons/fa";
+import axios from "axios";
 
 export default function Header() {
   const [navPanelOpen, setNavPanelOpen] = useState(false);
   const token = localStorage.getItem("token");
+  const [username, setUsername] = useState("");
+
+    useEffect(() => {
+    axios
+      .get(`http://localhost:5000/api/users/`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        const user = res.data;
+        setUsername(user.firstName +" " + user.lastName || "User");
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   return (
     <header className="fixed top-0 left-0 w-full h-[70px] z-50 backdrop-blur-md bg-gradient-to-r from-[#0f172a]/80 via-[#1e293b]/80 to-[#334155]/80 shadow-lg border-b border-white/10 flex items-center justify-between px-5 sm:px-10 text-white transition-all duration-500">
@@ -74,17 +92,21 @@ export default function Header() {
         </Link>
       </nav>
 
-      {/* Logout button (desktop) */}
       {token && (
-        <button
-          onClick={() => {
-            localStorage.removeItem("token");
-            window.location.href = "/login";
-          }}
-          className="hidden md:block text-sm font-semibold px-4 py-2 bg-yellow-400 text-[#1e293b] rounded-lg hover:bg-yellow-300 transition-all duration-300"
-        >
-          Logout
-        </button>
+        <div className="flex items-center gap-3 justify-center">
+          <div className="text-yellow-500 flex justify-center items-center">
+            <FaUserCircle className="text-2xl m-1" /> {username}
+          </div>
+          <button
+            onClick={() => {
+              localStorage.removeItem("token");
+              window.location.href = "/login";
+            }}
+            className="hidden md:block text-sm font-semibold px-4 py-2 bg-yellow-400 text-[#1e293b] rounded-lg hover:bg-yellow-300 transition-all duration-300"
+          >
+            Logout
+          </button>
+        </div>
       )}
 
         {!token && (

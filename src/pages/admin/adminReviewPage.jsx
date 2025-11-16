@@ -74,7 +74,7 @@ export default function AdminReviewPage() {
   const approvedReviews = reviews.filter((r) => r.isApproved);
 
   return (
-    <div className="min-h-screen bg-[#0d1117] text-white p-10">
+    <div className="min-h-screen text-white p-10">
       <h1 className="text-3xl font-bold text-center text-blue-400 mb-10">
         Admin Review Management
       </h1>

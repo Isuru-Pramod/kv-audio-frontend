@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function AdminInquiries() {
     const [inquiries, setInquiries] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [replyText, setReplyText] = useState({}); // track replies by inquiry ID
-    const token = localStorage.getItem("token"); // admin JWT
+    const [replyText, setReplyText] = useState({});
+    const token = localStorage.getItem("token");
 
     useEffect(() => {
         fetchInquiries();
@@ -20,7 +22,7 @@ export default function AdminInquiries() {
             setInquiries(res.data);
         } catch (err) {
             console.error(err);
-            alert("Failed to load inquiries");
+            toast.error("❌ Failed to load inquiries");
         } finally {
             setLoading(false);
         }
@@ -33,7 +35,7 @@ export default function AdminInquiries() {
     const sendReply = async (id) => {
         const reply = replyText[id];
         if (!reply || reply.trim() === "") {
-            alert("Please enter a reply first.");
+            toast.warning("⚠️ Please enter a reply first.");
             return;
         }
 
@@ -43,12 +45,12 @@ export default function AdminInquiries() {
                 { reply },
                 { headers: { Authorization: `Bearer ${token}` } }
             );
-            alert("Reply sent successfully!");
+            toast.success("✅ Reply sent successfully!");
             setReplyText({ ...replyText, [id]: "" });
             fetchInquiries();
         } catch (err) {
             console.error(err);
-            alert("Failed to send reply");
+            toast.error("❌ Failed to send reply");
         }
     };
 
@@ -59,86 +61,84 @@ export default function AdminInquiries() {
             await axios.delete(`http://localhost:5000/api/inquiries/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            alert("Inquiry deleted successfully");
+            toast.success("🗑️ Inquiry deleted successfully");
             setInquiries(inquiries.filter((inq) => inq.id !== id));
         } catch (err) {
             console.error(err);
-            alert("Failed to delete inquiry");
+            toast.error("❌ Failed to delete inquiry");
         }
     };
 
-    if (loading) return <div className="border-4 my-4 border-b-green-500 rounded-full w-[100px] h-[100px] animate-spin"></div>;
+    if (loading)
+        return (
+		<div className="flex justify-center items-center h-[300px]">
+			<div className="border-4 border-gray-700 border-t-blue-500 rounded-full w-20 h-20 animate-spin"></div>
+		</div>
+        );
 
     return (
-        <div className="p-8">
-            <h1 className="text-2xl font-bold mb-6 text-center text-blue-700">
+        <div className="min-h-screen text-gray-100 p-6">
+            <ToastContainer position="bottom-right" theme="dark" />
+            <h1 className="text-3xl font-bold mb-8 text-center text-blue-400">
                 Admin Inquiries
             </h1>
 
             {inquiries.length === 0 ? (
-                <p className="text-center text-gray-500">No inquiries found.</p>
+                <p className="text-center text-gray-400">No inquiries found.</p>
             ) : (
-                <div className="overflow-x-auto">
-                    <table className="min-w-full border border-gray-200 rounded-lg">
-                        <thead className="bg-gray-100">
-                            <tr>
-                                <th className="px-4 py-2 border">ID</th>
-                                <th className="px-4 py-2 border">Email</th>
-                                <th className="px-4 py-2 border">Phone</th>
-                                <th className="px-4 py-2 border">Message</th>
-                                <th className="px-4 py-2 border">Reply</th>
-                                <th className="px-4 py-2 border">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {inquiries.map((inq) => (
-                                <tr key={inq.id} className="border-t">
-                                    <td className="px-4 py-2 border text-center">{inq.id}</td>
-                                    <td className="px-4 py-2 border">{inq.email}</td>
-                                    <td className="px-4 py-2 border">{inq.phone}</td>
-                                    <td className="px-4 py-2 border">{inq.message}</td>
-                                    <td className="px-4 py-2 border">
-                                        {inq.reply && inq.reply.trim() !== "" ? (
-                                            <div>
-                                                <p className="text-green-700 font-medium">{inq.reply}</p>
-                                                {inq.repliedAt && (
-                                                    <p className="text-xs text-gray-500">
-                                                        {new Date(inq.repliedAt).toLocaleString()}
-                                                    </p>
-                                                )}
-                                            </div>
-                                        ) : (
-                                            <div>
-                                                <textarea
-                                                    className="w-full border rounded p-1 text-sm"
-                                                    rows="2"
-                                                    placeholder="Write a reply..."
-                                                    value={replyText[inq.id] || ""}
-                                                    onChange={(e) =>
-                                                        handleReplyChange(inq.id, e.target.value)
-                                                    }
-                                                />
-                                                <button
-                                                    onClick={() => sendReply(inq.id)}
-                                                    className="mt-2 bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded text-sm"
-                                                >
-                                                    Send Reply
-                                                </button>
-                                            </div>
-                                        )}
-                                    </td>
-                                    <td className="px-4 py-2 border text-center">
-                                        <button
-                                            onClick={() => deleteInquiry(inq.id)}
-                                            className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded text-sm"
-                                        >
-                                            Delete
-                                        </button>
-                                    </td>
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {inquiries.map((inq) => (
+                        <div
+                            key={inq.id}
+                            className="bg-gray-800 p-5 rounded-2xl shadow-lg border border-gray-700 hover:border-blue-500 transition-all duration-300"
+                        >
+                            <div className="mb-2">
+                                <p className="text-sm text-gray-400">ID: {inq.id}</p>
+                                <p className="font-semibold text-blue-300">{inq.email}</p>
+                                <p className="text-gray-400">{inq.phone}</p>
+                            </div>
+
+                            <p className="text-gray-200 mt-3 mb-4 border-l-4 border-blue-400 pl-3 italic">
+                                {inq.message}
+                            </p>
+
+                            {inq.reply && inq.reply.trim() !== "" ? (
+                                <div className="bg-green-900/40 p-3 rounded-lg border border-green-700">
+                                    <p className="text-green-300 font-medium">{inq.reply}</p>
+                                    {inq.repliedAt && (
+                                        <p className="text-xs text-gray-500 mt-1">
+                                            {new Date(inq.repliedAt).toLocaleString()}
+                                        </p>
+                                    )}
+                                </div>
+                            ) : (
+                                <div>
+                                    <textarea
+                                        className="w-full bg-gray-700 text-gray-100 border border-gray-600 rounded-lg p-2 text-sm resize-none focus:ring-2 focus:ring-blue-500"
+                                        rows="2"
+                                        placeholder="Write a reply..."
+                                        value={replyText[inq.id] || ""}
+                                        onChange={(e) =>
+                                            handleReplyChange(inq.id, e.target.value)
+                                        }
+                                    />
+                                    <button
+                                        onClick={() => sendReply(inq.id)}
+                                        className="mt-3 w-full bg-blue-600 hover:bg-blue-700 text-white px-3 py-2 rounded-lg text-sm transition-colors"
+                                    >
+                                        Send Reply
+                                    </button>
+                                </div>
+                            )}
+
+                            <button
+                                onClick={() => deleteInquiry(inq.id)}
+                                className="mt-3 w-full bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg text-sm transition-colors"
+                            >
+                                Delete Inquiry
+                            </button>
+                        </div>
+                    ))}
                 </div>
             )}
         </div>

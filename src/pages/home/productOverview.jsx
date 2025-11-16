@@ -61,8 +61,8 @@ export default function ProductOverview() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-950 text-white py-12 px-6 w-screen h-max">
-      <div className="max-w-6xl mx-auto bg-slate-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-950 text-white py-12 px-6 w-screen h-max ">
+      <div className="max-w-6xl mx-auto bg-slate-800 rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row mt-[40px]">
         
         {/* Image Section */}
         <div className="lg:w-1/2 bg-slate-700 p-6 flex justify-center items-center">

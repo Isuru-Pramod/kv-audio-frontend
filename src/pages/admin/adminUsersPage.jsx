@@ -70,9 +70,9 @@ export default function AdminUsersPage() {
         <p className="text-gray-400">No users found.</p>
       ) : (
         <div className="w-full max-w-6xl bg-gray-800 rounded-2xl shadow-lg p-4">
-          {/* ------------------------ */}
+
           {/* TABLE FOR MD+ SCREENS */}
-          {/* ------------------------ */}
+
           <div className="hidden md:block overflow-x-auto">
             <table className="min-w-full border-collapse">
               <thead>
@@ -96,7 +96,7 @@ export default function AdminUsersPage() {
                   >
                     <td className="p-3">
                       <img
-                        src={user.profilePicture || "https://picsum.photos/50"}
+                        src={user.profilePicture || "https://www.pngkey.com/png/full/115-1150152_default-profile-picture-avatar-png-green.png"}
                         alt="Profile"
                         className="w-10 h-10 rounded-full border border-gray-600 object-cover"
                       />
@@ -141,9 +141,8 @@ export default function AdminUsersPage() {
             </table>
           </div>
 
-          {/* ------------------------ */}
+
           {/* MOBILE CARD VIEW */}
-          {/* ------------------------ */}
           <div className="md:hidden flex flex-col gap-4">
             {users.map((user) => (
               <div

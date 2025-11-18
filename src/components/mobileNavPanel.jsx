@@ -43,7 +43,6 @@ export default function MobileNavPanel({ isOpen, setOpen }) {
                 { icon: <MdPhotoLibrary className="text-2xl" />, label: "Gallery", path: "/gallery" },
                 { icon: <FaRegCalendarCheck className="text-2xl" />, label: "Booking", path: "/booking" },
                 { icon: <MdContacts className="text-2xl" />, label: "Contact", path: "/contact" },
-                { icon: <MdInfoOutline className="text-2xl" />, label: "About", path: "/about" },
               ].map((item, index) => (
                 <div
                   key={index}

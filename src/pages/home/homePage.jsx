@@ -8,6 +8,7 @@ import ErrorNotfound from "./error";
 import ProductOverview from "./productOverview";
 import BookingPage from "./bookingPage";
 import Reviws from "./reviews";
+import MyOders from "./MyOders";
 
 export default function HomePage(){
     return(
@@ -22,6 +23,7 @@ export default function HomePage(){
                     <Route path="/items" element={<Items/>}/>
                     <Route path="/gallery" element={<Gallery/>}/>
                     <Route path="/reviws" element={<Reviws/>}/>
+                    <Route path="/myOders" element={<MyOders/>}/>
                     <Route path="/product/:key" element={<ProductOverview/>}/>
                     <Route path="/" element={<Home/>}/>
 

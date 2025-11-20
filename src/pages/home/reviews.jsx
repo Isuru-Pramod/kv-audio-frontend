@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Trash2 } from "lucide-react"; // clean modern delete icon
+import Footer from "../../components/Footer";
 
 export default function Reviews() {
   const [reviews, setReviews] = useState([]);
@@ -9,10 +10,10 @@ export default function Reviews() {
   const [rating, setRating] = useState(0);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const token = localStorage.getItem("token");
 
   // ✅ Get logged-in user data from JWT (localStorage)
   useEffect(() => {
-    const token = localStorage.getItem("token");
     if (token) {
       try {
         const payload = JSON.parse(atob(token.split(".")[1]));
@@ -93,7 +94,9 @@ export default function Reviews() {
   }
 
   return (
-    <div className="bg-gray-900 text-white w-full min-h-screen pt-[100px] h-max flex flex-col items-center px-6">
+
+    <div className="w-full">
+      <div className="bg-gray-900 text-white w-full min-h-screen pt-[100px] h-max flex flex-col items-center px-6">
       <h1 className="text-yellow-400 text-5xl font-extrabold mb-8 text-center">
         Customer Reviews
       </h1>
@@ -101,7 +104,7 @@ export default function Reviews() {
       {/* ====== Reviews Section ====== */}
       {loading ? (
         <div className="flex justify-center items-center mt-10">
-          <div className="w-[50px] h-[50px] border-4 rounded-full border-t-yellow-400 animate-spin"></div>
+          <div className="border-4 border-gray-700 border-t-blue-500 rounded-full w-20 h-20 animate-spin"></div>
         </div>
       ) : reviews.length === 0 ? (
         <p className="text-gray-400 mt-10">No reviews yet. Be the first!</p>
@@ -146,7 +149,8 @@ export default function Reviews() {
       )}
 
       {/* ====== Review Form ====== */}
-      <div className="bg-gray-800 rounded-2xl shadow-lg p-8 w-full max-w-[600px] flex flex-col items-center mb-[100px]">
+      {token && (
+          <div className="bg-gray-800 rounded-2xl shadow-lg p-8 w-full max-w-[600px] flex flex-col items-center mb-[100px]">
         <h2 className="text-yellow-400 text-3xl font-bold mb-4">
           Leave a Review
         </h2>
@@ -178,6 +182,11 @@ export default function Reviews() {
           Submit Review
         </button>
       </div>
+
+      )}
+    </div>
+    <Footer/>
+    
     </div>
   );
 }

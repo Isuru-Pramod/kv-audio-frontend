@@ -55,7 +55,7 @@ export default function LoginPage() {
       }
 
             if(user.role ==="admin"){
-                navigate("/admin");
+                navigate("/admin/orders");
             }else{
                 navigate("/");
             }

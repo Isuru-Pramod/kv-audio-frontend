@@ -75,8 +75,15 @@ export default function MyOrders() {
 
       {/* Loading */}
       {loading ? (
-        <div className="flex justify-center items-center h-[300px]">
+        <div className="flex justify-center items-center h-[300px] flex-col">
+          
+        {token && (
           <div className="border-4 border-gray-700 border-t-blue-500 rounded-full w-20 h-20 animate-spin"></div>
+      )}
+        {!token && (
+          <div > You are not logged in</div>
+      )}
+
         </div>
       ) : orders.length === 0 ? (
         <p className="text-center text-gray-500 mt-[100px] mb-[300px]">No orders found.</p>

@@ -19,7 +19,7 @@ export default function Contact() {
       setInquiries(res.data);
     } catch (err) {
       console.error(err);
-      toast.error("Failed to load inquiries");
+      toast.error("Please login to sent inquiries");
     } finally {
       setLoading(false);
     }

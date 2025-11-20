@@ -42,10 +42,8 @@ export default function Items() {
       {state === "loading" && (
         <div className="flex justify-center items-center h-[300px]">
           <div className="relative">
-            <div className="w-16 h-16 border-4 border-gray-300 border-t-yellow-500 rounded-full animate-spin"></div>
-            <span className="absolute inset-0 flex items-center justify-center text-yellow-500 font-semibold">
-              Loading...
-            </span>
+           <div className="border-4 border-gray-700 border-t-blue-500 rounded-full w-20 h-20 animate-spin"></div>
+            
           </div>
         </div>
       )}

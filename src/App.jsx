@@ -35,3 +35,15 @@ function App() {
 }
 
 export default App
+
+{/* Accounts and passwords
+  
+Admin@gmail.com
+123
+
+cos2@gmail.com
+123
+
+cos@gmail.com
+123
+  */}

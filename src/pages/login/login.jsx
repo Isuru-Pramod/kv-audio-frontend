@@ -7,6 +7,18 @@ import { useGoogleLogin } from "@react-oauth/google";
 
 export default function LoginPage() {
 
+  {/* Accounts and passwords
+  
+Admin@gmail.com
+123
+
+cos2@gmail.com
+123
+
+cos@gmail.com
+123
+  */}
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
